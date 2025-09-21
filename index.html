@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flores Amarillas 🌼</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: purple;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .emoji {
+      font-size: 3rem;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background: yellow;
+      color: black;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    h1 {
+      display: none;
+      margin-top: 20px;
+    }
+
+    /* Flores */
+    .flowers {
+      display: none;
+      margin-top: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .flowers img {
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .flowers img:hover {
+      transform: scale(1.2);
+    }
+
+    /* Tarjeta */
+    .card {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px black;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .card img {
+      max-width: 200px;
+      border-radius: 10px;
+    }
+
+    .close {
+      margin-top: 10px;
+      padding: 5px 15px;
+      border: none;
+      background: crimson;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Imagen y GIF en esquinas */
+    .corner-left, .corner-right {
+      position: fixed;
+      top: 10px;
+      z-index: 999;
+      display: none;
+    }
+
+    .corner-left {
+      left: 10px;
+    }
+
+    .corner-right {
+      right: 10px;
+    }
+
+    .corner-left img, .corner-right img {
+      max-width: 120px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="emoji">👉</div>
+    <button class="btn">Haz clic aquí</button>
+    <h1>Unas flores amarillas para la princesa más hermosa del universo</h1>
+
+    <!-- Flores -->
+    <div class="flowers">
+      <img src="https://em-content.zobj.net/thumbs/120/apple/354/sunflower_1f33b.png" alt="Flor">
+      <img src="https://em-content.zobj.net/thumbs/120/apple/354/sunflower_1f33b.png" alt="Flor">
+      <img src="https://em-content.zobj.net/thumbs/120/apple/354/sunflower_1f33b.png" alt="Flor">
+    </div>
+  </div>
+
+  <!-- Imagen en esquina derecha -->
+  <div class="corner-right">
+    <img src="flor.gif" alt="Imagen especial">
+  </div>
+
+  <!-- GIF en esquina izquierda -->
+  <div class="corner-left">
+    <img src="conejo.gif" alt="Gif romántico">
+  </div>
+
+  <!-- Tarjeta -->
+  <div class="card" id="card">
+    <h2>💌 Carta para ti 💌</h2>
+    <p>💖no pude darte flores amarillas, intente que la sam las comprara yo se las pagaba
+        y asi tendrias tus flores aamrillas ya que no puedo darselas en persona, prometo 
+        darte unas flores amarillas hermosas, pero intente buscar la mejor solucion asi que
+        te hice esta pagina web como remplazo por ahora :c te amo mxo mi amorcito💖</p>
+    <img src="romantico.gif" alt="Gif amoroso">
+    <br>
+    <button class="close">Cerrar</button>
+  </div>
+
+  <script>
+    const btn = document.querySelector('.btn');
+    const h1 = document.querySelector('h1');
+    const flowers = document.querySelector('.flowers');
+    const card = document.getElementById('card');
+    const closeBtn = document.querySelector('.close');
+    const cornerLeft = document.querySelector('.corner-left');
+    const cornerRight = document.querySelector('.corner-right');
+
+    btn.addEventListener('click', () => {
+      // Explosión GIF
+      const explosionGif = document.createElement('img');
+      explosionGif.src = 'explosion.gift'; // tu GIF/PNG subido
+      explosionGif.style.position = 'absolute';
+      explosionGif.style.width = '150px';
+      explosionGif.style.height = '150px';
+      explosionGif.style.left = btn.offsetLeft + btn.offsetWidth/2 - 75 + "px";
+      explosionGif.style.top = btn.offsetTop + btn.offsetHeight/2 - 75 + "px";
+      explosionGif.style.zIndex = '100';
+      btn.parentElement.appendChild(explosionGif);
+
+      // Borrar GIF después de 1s
+      setTimeout(() => {
+        explosionGif.remove();
+
+        // Mostrar mensaje, flores y elementos de esquinas
+        btn.style.display = 'none';
+        document.querySelector('.emoji').style.display = 'none';
+        h1.style.display = 'block';
+        flowers.style.display = 'flex';
+        cornerLeft.style.display = 'block';
+        cornerRight.style.display = 'block';
+      }, 1000);
+    });
+
+    // Mostrar tarjeta al hacer clic en una flor
+    flowers.addEventListener('click', () => {
+      card.style.display = 'block';
+    });
+
+    // Cerrar tarjeta
+    closeBtn.addEventListener('click', () => {
+      card.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
